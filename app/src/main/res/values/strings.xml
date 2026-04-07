@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Bunny</string>
+    <string name="theme">Theme</string>
+    <string name="theme_aqua">Aqua</string>
+    <string name="theme_brown">Brown</string>
+    <string name="theme_earthy">Earthy</string>
+    <string name="theme_green">Green</string>
+    <string name="theme_pink">Pink</string>
+    <string name="theme_purple">Purple</string>
+    <string name="theme_yellow">Yellow</string>
+    <string name="home">Home</string>
+    <string name="settings">Settings</string>
+    <string name="reader">Reader</string>
+    <string name="back">Back</string>
+</resources>
