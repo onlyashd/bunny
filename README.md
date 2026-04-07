@@ -1,6 +1,8 @@
 # Bunny
 
-<img src="icon_app.png" alt="white rabbit on green background" width="128px">
+<p align="center">
+<img src="icon_app.png" alt="white rabbit on green background" width="128">
+</p>
 
 Bunny is a high-performance epub reader for Android, specifically engineered for RSVP (Rapid
 Serial Visual Presentation). By flashing words at a controlled speed, Bunny allows you to
