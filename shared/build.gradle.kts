@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "io.github.onlyashd.aidl"
+    namespace = "io.github.onlyashd.shared"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1

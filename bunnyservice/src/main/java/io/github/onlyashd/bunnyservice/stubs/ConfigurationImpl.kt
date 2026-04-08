@@ -1,7 +1,7 @@
 package io.github.onlyashd.bunnyservice.stubs
 
 import android.os.Bundle
-import io.github.onlyashd.aidl.IConfiguration
+import io.github.onlyashd.shared.IConfiguration
 import javax.inject.Inject
 import javax.inject.Singleton
 

@@ -6,9 +6,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import io.github.onlyashd.aidl.Actions
-import io.github.onlyashd.aidl.Constants
-import io.github.onlyashd.aidl.IConfiguration
+import io.github.onlyashd.shared.Actions
+import io.github.onlyashd.shared.Constants
+import io.github.onlyashd.shared.IConfiguration
 import io.github.onlyashd.bunny.api.Configuration
 import io.github.onlyashd.bunny.api.ServiceProvider
 import javax.inject.Singleton

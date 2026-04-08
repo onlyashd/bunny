@@ -1,4 +1,4 @@
-package io.github.onlyashd.aidl;
+package io.github.onlyashd.shared;
 
 interface IConfiguration {
     /**

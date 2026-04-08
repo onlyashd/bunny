@@ -2,7 +2,7 @@ package io.github.onlyashd.bunnyservice.core
 
 import android.content.Intent
 import android.os.IBinder
-import io.github.onlyashd.aidl.Actions
+import io.github.onlyashd.shared.Actions
 import io.github.onlyashd.bunnyservice.stubs.ConfigurationImpl
 import javax.inject.Inject
 

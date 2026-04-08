@@ -24,5 +24,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Bunny"
 include(":app")
-include(":aidl")
+include(":shared")
 include(":bunnyservice")
