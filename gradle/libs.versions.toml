@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.3.20"
+kotlin = "2.3.10" # CodeQL currently supports Kotlin versions up to 2.3.10
 hilt = "2.59.2"
 agp = "9.1.0"
 appcompat = "1.7.1"
