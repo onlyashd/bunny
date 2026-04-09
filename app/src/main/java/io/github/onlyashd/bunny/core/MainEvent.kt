@@ -4,5 +4,6 @@ import io.github.onlyashd.bunny.ui.theme.Theme
 
 sealed class MainEvent {
     data class ThemeChange(val theme: Theme): MainEvent()
-    data class ToolbarChange(val toolbarTitle: String): MainEvent()
+    class SentryStateChange: MainEvent()
+    class SentryScreeningChange: MainEvent()
 }

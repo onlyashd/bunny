@@ -4,5 +4,6 @@ import io.github.onlyashd.bunny.ui.theme.Theme
 
 data class MainState(
     val theme: Theme = AppPreferences.getTheme(),
-    val toolbarTitle: String = AppPreferences.getToolbar()
+    val sentryState: Boolean = AppPreferences.getSentryState(),
+    val enabledSentryScreening: Boolean = AppPreferences.getSentryScreening(),
 )

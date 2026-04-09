@@ -12,4 +12,12 @@
     <string name="settings">Settings</string>
     <string name="reader">Reader</string>
     <string name="back">Back</string>
+    <string name="info">Info</string>
+    <string name="sentry_title">Error tracking</string>
+    <string name="sentry_dialog_title">Help the developers</string>
+    <string name="close">Close</string>
+    <string name="sentry_dialog_description"><![CDATA[<p>\n    We use <a href=\"https://docs.sentry.io/product/#whats-sentry\">Sentry</a> to identify errors and act on them\n    proactively.\n    <br><br>\n    <b>FAQ:</b>\n<ul>\n    <li>\n        <b>Is it mandatory?</b>\n        <br>\n        No, it\'s totally optional.\n    </li>\n    <li>\n        <b>What\'s collected?</b>\n        <br>\n        Just system information, no personal data is ever sent.\n    </li>\n    <li>\n        <b>Can I turn off later?</b>\n        <br>\n        Yes, you have total control of it, you can enable or disable whenever you want.\n    </li>\n</ul>\n<br>You can see more details of Sentry\'s configuration <a href=\"https://docs.sentry.io/platforms/android/configuration/options/\">here</a>.\n<br>\nAll options that track user data disabled always.\n</p>]]></string>
+    <string name="dont_show_again">Don\'t show again</string>
+    <string name="enable">Enable</string>
+    <string name="dismiss">Dismiss</string>
 </resources>

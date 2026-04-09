@@ -5,7 +5,8 @@ import io.paperdb.Paper
 
 object AppPreferences {
     const val APP_THEME = "AppTheme"
-    const val TOOLBAR_TITLE = "ToolbarTitle"
+    const val SENTRY_STATE = "SentryState"
+    const val SENTRY_SCREENING = "SentryScreening"
 
     fun setTheme(theme: Theme) {
         Paper.book().write(APP_THEME, theme)
@@ -15,11 +16,21 @@ object AppPreferences {
         return Paper.book().read(APP_THEME, Theme.Aqua)!!
     }
 
-    fun setToolbar(title: String) {
-        Paper.book().write(TOOLBAR_TITLE, title)
+    fun toggleSentryState() {
+        val current = Paper.book().read(SENTRY_STATE, false)!!
+        Paper.book().write(SENTRY_STATE, !current)
     }
 
-    fun getToolbar(): String {
-        return Paper.book().read(TOOLBAR_TITLE, "")!!
+    fun getSentryState(): Boolean {
+        return Paper.book().read(SENTRY_STATE, false)!!
+    }
+
+    fun toggleSentryScreening() {
+        val current = Paper.book().read(SENTRY_SCREENING, true)!!
+        Paper.book().write(SENTRY_SCREENING, !current)
+    }
+
+    fun getSentryScreening(): Boolean {
+        return Paper.book().read(SENTRY_SCREENING, true)!!
     }
 }

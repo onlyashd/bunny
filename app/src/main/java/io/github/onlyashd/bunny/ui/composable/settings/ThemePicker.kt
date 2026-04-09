@@ -4,6 +4,8 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -12,10 +14,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -38,61 +42,66 @@ import io.github.onlyashd.bunny.util.extensions.getString
 fun ThemePicker(viewModel: MainViewModel? = hiltViewModel()) {
     val current = viewModel!!.stateApp.theme
 
-    ConstraintLayout(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(colorScheme().background)
-            .padding(8.dp)
-    ) {
-        val (titleRef, rowRef) = createRefs()
-
-        Text(
-            text = R.string.theme.getString(),
-            style = typography().titleMedium,
-            color = colorScheme().onBackground,
-            modifier = Modifier.constrainAs(titleRef) {
-                start.linkTo(parent.start)
-                top.linkTo(parent.top)
-            }
-        )
-
-        Row(
+    Column {
+        ConstraintLayout(
             modifier = Modifier
-                .horizontalScroll(rememberScrollState())
-                .constrainAs(rowRef) {
-                    start.linkTo(parent.start)
-                    top.linkTo(titleRef.bottom, 16.dp)
-                },
-            horizontalArrangement = Arrangement.spacedBy(4.dp)
+                .fillMaxWidth()
+                .background(colorScheme().background)
+                .padding(8.dp)
         ) {
-            ThemeCard(R.string.theme_aqua.getString(), Theme.Aqua, current) {
-                setAquaTheme(viewModel)
-            }
+            val (titleRef, rowRef) = createRefs()
 
-            ThemeCard(R.string.theme_brown.getString(), Theme.Brown, current) {
-                setBrownTheme(viewModel)
-            }
+            Text(
+                text = R.string.theme.getString(),
+                style = typography().titleLarge,
+                fontWeight = FontWeight.Bold,
+                color = colorScheme().onBackground,
+                modifier = Modifier.constrainAs(titleRef) {
+                    start.linkTo(parent.start)
+                    top.linkTo(parent.top)
+                }
+            )
 
-            ThemeCard(R.string.theme_earthy.getString(), Theme.Earthy, current) {
-                setEarthyTheme(viewModel)
-            }
+            Row(
+                modifier = Modifier
+                    .horizontalScroll(rememberScrollState())
+                    .constrainAs(rowRef) {
+                        start.linkTo(parent.start)
+                        top.linkTo(titleRef.bottom, 16.dp)
+                    },
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                ThemeCard(R.string.theme_aqua.getString(), Theme.Aqua, current) {
+                    setAquaTheme(viewModel)
+                }
 
-            ThemeCard(R.string.theme_green.getString(), Theme.Green, current) {
-                setGreenTheme(viewModel)
-            }
+                ThemeCard(R.string.theme_brown.getString(), Theme.Brown, current) {
+                    setBrownTheme(viewModel)
+                }
 
-            ThemeCard(R.string.theme_pink.getString(), Theme.Pink, current) {
-                setPinkTheme(viewModel)
-            }
+                ThemeCard(R.string.theme_earthy.getString(), Theme.Earthy, current) {
+                    setEarthyTheme(viewModel)
+                }
 
-            ThemeCard(R.string.theme_purple.getString(), Theme.Purple, current) {
-                setPurpleTheme(viewModel)
-            }
+                ThemeCard(R.string.theme_green.getString(), Theme.Green, current) {
+                    setGreenTheme(viewModel)
+                }
 
-            ThemeCard(R.string.theme_yellow.getString(), Theme.Yellow, current) {
-                setYellowTheme(viewModel)
+                ThemeCard(R.string.theme_pink.getString(), Theme.Pink, current) {
+                    setPinkTheme(viewModel)
+                }
+
+                ThemeCard(R.string.theme_purple.getString(), Theme.Purple, current) {
+                    setPurpleTheme(viewModel)
+                }
+
+                ThemeCard(R.string.theme_yellow.getString(), Theme.Yellow, current) {
+                    setYellowTheme(viewModel)
+                }
             }
         }
+
+        HorizontalDivider()
     }
 }
 
@@ -142,10 +151,4 @@ private fun ThemeCard(
             )
         }
     }
-}
-
-@Preview
-@Composable
-private fun Prev() {
-    ThemePicker(null)
 }

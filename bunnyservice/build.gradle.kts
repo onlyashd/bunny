@@ -24,7 +24,7 @@ android {
         versionName = "0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "SENTRY_DNS", "\"${Sentry.SERVICE_DNS}\"")
+        buildConfigField("String", "SENTRY_DSN", "\"${Sentry.SERVICE_DSN}\"")
     }
 
     buildTypes {
@@ -59,8 +59,8 @@ dependencies {
 }
 
 sentry {
-    org.set("bunny")
+    org.set(Sentry.ORG)
     projectName.set("bunny-service")
-    authToken.set(Sentry.SERVICE_TOKEN)
+    authToken.set(Sentry.AUTH_TOKEN)
     includeSourceContext.set(true)
 }
