@@ -14,8 +14,8 @@ heavy tasks like book downloading and parsing are offloaded to a dedicated backg
 ## Features
 
 * **RSVP Engine**: Custom-built engine for Rapid Serial Visual Presentation.
-* **epub Support**: Comprehensive support for standard ePub formats.
-* **Integrated Downloader**: Background service for fetching books without interrupting your reading
+* **epub Support**: Comprehensive support for standard epub formats.
+* **Downloader Plugin**: Background service for fetching books without interrupting your reading
   flow.
 * **Material You**: Clean, modern interface that adapts to your device's theme.
 * **Remote Configuration**: Shared settings managed across processes via AIDL.
@@ -50,14 +50,12 @@ check our [releases page](https://github.com/onlyashd/bunny/releases).
 * Android SDK 29+
 
 1. Clone the repository:
-
 ```shell
-git clone https://github.com/onlyashd/bunny-reader.git 
+git clone https://github.com/onlyashd/bunny.git 
 ```
-
 2. Open the project in Android Studio.
 3. Synchronize Gradle.
-4. Run the `app` configuration on your device or emulator.
+4. Run the `app` configuration.
 
 ## Architecture
 
