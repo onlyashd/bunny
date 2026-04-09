@@ -1,0 +1,108 @@
+name: Release Creation
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Tag name (e.g., v1.0.0)'
+        required: true
+        type: string
+      release_type:
+        description: 'Release Type'
+        required: true
+        type: choice
+        options:
+          - release
+          - pre-release
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    env:
+      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+      KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+      KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+      KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Create Git Tag
+        run: |
+          git tag ${{ github.event.inputs.tag_name }}
+          git push origin ${{ github.event.inputs.tag_name }}
+
+      - name: Decode Keystore
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > release.keystore
+          echo "KEYSTORE_PATH=$(pwd)/release.keystore" >> $GITHUB_ENV
+
+      - name: Generate Sentry Properties
+        run: |
+          echo "SENTRY_APP_DSN=${{ secrets.SENTRY_APP_DSN }}" > sentry.properties
+          echo "SENTRY_SERVICE_DSN=${{ secrets.SENTRY_SERVICE_DSN }}" >> sentry.properties
+          echo "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}" >> sentry.properties
+
+      - name: Build and Sign Apps
+        run: |
+          chmod +x gradlew
+          ./gradlew :app:assembleRelease :bunnyservice:assembleRelease
+        env:
+          RELEASE_STORE_FILE: ${{ env.KEYSTORE_PATH }}
+          RELEASE_STORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          RELEASE_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          RELEASE_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+
+      - name: Rename APKs for Release
+        run: |
+          mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/BunnyApp-${{ github.event.inputs.tag_name }}.apk
+          mv bunnyservice/build/outputs/apk/release/bunnyservice-release.apk bunnyservice/build/outputs/apk/release/BunnyService-${{ github.event.inputs.tag_name }}.apk
+
+      - name: Generate SHA-256 Hashes
+        id: shasum
+        run: |
+          # Generate hashes for both APKs
+          CLIENT_SHA=$(sha256sum app/build/outputs/apk/release/*.apk | awk '{ print $1 }')
+          SERVER_SHA=$(sha256sum bunnyservice/build/outputs/apk/release/*.apk | awk '{ print $1 }')
+          
+          # Save to output for use in the next step
+          echo "client_sha=$CLIENT_SHA" >> $GITHUB_OUTPUT
+          echo "server_sha=$SERVER_SHA" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release Draft
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.tag_name }}
+          draft: true
+          prerelease: ${{ github.event.inputs.release_type == 'pre-release' }}
+          body: |
+            ## Verification Hashes (SHA-256)
+            * **BunnyApp:** `${{ steps.shasum.outputs.client_sha }}`
+            * **BunnyService:** `${{ steps.shasum.outputs.server_sha }}`
+            
+            > **Note:** To verify, run `sha256sum <file.apk>` in your terminal and compare the result.
+          files: |
+            app/build/outputs/apk/release/*.apk
+            bunnyservice/build/outputs/apk/release/*.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cleanup Secrets
+        if: always()
+        run: |
+          rm -f release.keystore
+          rm -f sentry.properties
+          unset KEYSTORE_PASSWORD
+          unset KEY_ALIAS
+          unset KEY_PASSWORD
