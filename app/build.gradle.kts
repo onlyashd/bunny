@@ -60,6 +60,7 @@ android {
 
 dependencies {
     implementation(project(":shared"))
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -71,9 +72,10 @@ dependencies {
     implementation(libs.androidx.compose.constraintlayout)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.documentfile)
     implementation(libs.hilt)
     implementation(libs.paper)
-    implementation(libs.bundles.readium)
+    implementation(libs.coil)
     ksp(libs.hilt.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
