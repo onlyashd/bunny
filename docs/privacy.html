@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bunny - Privacy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans">
+
+<nav class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+        <a href="index.html" class="text-2xl font-bold text-green-600 flex items-center gap-2">
+            <img src="../icon_app.png" alt="Bunny Logo" class="w-8 h-8"> Bunny
+        </a>
+        <div class="space-x-6 flex items-center">
+            <a href="instructions.html" class="hover:text-green-600">Instructions</a>
+            <a href="contributing.html" class="hover:text-green-600">Developers</a>
+            <a href="privacy.html" class="hover:text-green-600">Privacy</a>
+            <a href="https://github.com/onlyashd/bunny" class="bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-700 transition">GitHub</a>
+        </div>
+    </div>
+</nav>
+
+<main class="max-w-3xl mx-auto px-4 py-16 text-slate-700 leading-relaxed">
+    <h1 class="text-4xl font-extrabold text-slate-900 mb-6">Privacy Policy</h1>
+
+    <p class="mb-6">
+        This privacy policy document provides information on what, how, and why personal data or information is collected, used, and disclosed when this software is utilized. The objective of this policy is to provide an open environment between developer and users by openly stating what information is collected. By utilizing this software, you accept all the terms and conditions peculiar to <strong>Bunny</strong>. This Policy applies to this software only.
+    </p>
+
+    <hr class="my-10 border-slate-200">
+
+    <section class="space-y-6">
+        <h2 class="text-2xl font-bold text-slate-900">Permission and Access</h2>
+        <p>
+            For better and enhanced utilization of Bunny, the software is designed to request certain permissions. These need to be enabled for the software to work properly on your device.
+        </p>
+        <p>We provide two separated apps to isolate the functionality of reading and writing files:</p>
+        <ul class="list-disc ml-6 space-y-2">
+            <li><strong>Bunny (Main App):</strong> The ePub reader. Requires <strong>Storage</strong> permission to open and display ebooks.</li>
+            <li><strong>Bunny Service (Plugin App):</strong> Optional background service for downloads. Requires <strong>Storage</strong> and <strong>Manage all files (Android 11+)</strong>.</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-slate-800 mt-4">Bunny Service Capabilities:</h3>
+        <ul class="list-disc ml-6 space-y-1">
+            <li><strong>Full network access:</strong> To create network sockets (does not require sending data to the internet).</li>
+            <li><strong>View network/Wi-Fi connections:</strong> To monitor connectivity status.</li>
+            <li><strong>Run at startup:</strong> To initialize services after device boot.</li>
+            <li><strong>Control vibration & Prevent sleep:</strong> To manage background tasks and notifications.</li>
+            <li><strong>Install shortcuts:</strong> To add Home screen icons.</li>
+        </ul>
+        <p class="bg-green-50 p-4 border-l-4 border-green-500 text-sm">
+            The information collected via these permissions is stored <strong>locally on your device</strong>. The developer has no access to this information.
+        </p>
+
+        <h2 class="text-2xl font-bold text-slate-900 pt-4">Types of Data Collected</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div>
+                <h4 class="font-bold">Personal Data</h4>
+                <p class="text-sm">The developer doesn't collect personally identifiable data, except for optional opt-in crash logs.</p>
+            </div>
+            <div>
+                <h4 class="font-bold">Usage Data</h4>
+                <p class="text-sm">The developer doesn't collect usage data.</p>
+            </div>
+            <div>
+                <h4 class="font-bold">Installation Data</h4>
+                <p class="text-sm">The developer has no way to acquire knowledge about who has installed the software.</p>
+            </div>
+        </div>
+
+        <h2 class="text-2xl font-bold text-slate-900 pt-4">Crash Reports</h2>
+        <p>
+            Bunny is under active development. You may opt-in to send logs to help diagnose bugs. These logs contain <strong>no personal or identifying information</strong> and are deleted as soon as they are no longer needed.
+        </p>
+
+        <h2 class="text-2xl font-bold text-slate-900 pt-4">Service Providers & Data Transfer</h2>
+        <p>
+            Bunny depends on third-party libraries. These third parties don't have access to your Personal Data. However, because these libraries are contained within the software, information may technically be processed in jurisdictions where data protection laws differ from your own.
+        </p>
+
+        <h2 class="text-2xl font-bold text-slate-900 pt-4">Security & Children</h2>
+        <p>
+            This software is intended for general use with no restrictions on children (unless local laws state otherwise). While we strive to protect local data, no method of electronic storage is 100% secure.
+        </p>
+
+        <h2 class="text-2xl font-bold text-slate-900 pt-4">Disclaimer</h2>
+        <p>
+            Bunny is developed in good faith. The developer will not be held accountable for how you decide to use this software and will not be liable for any losses or damages in connection with its use.
+        </p>
+
+        <h2 class="text-2xl font-bold text-slate-900 pt-4">Contact</h2>
+        <p>
+            Questions regarding this policy or the project can be directed to the
+            <a href="https://github.com/onlyashd/bunny/issues" class="text-green-600 underline">GitHub Issues page</a>.
+        </p>
+    </section>
+</main>
+
+<footer class="py-10 text-center text-slate-500 border-t">
+    <p>&copy; 2026 Bunny Project. Licensed under AGPL-3.0.</p>
+</footer>
+</body>
+</html>
