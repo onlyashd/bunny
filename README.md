@@ -4,7 +4,7 @@
 <img src="icon_app.png" alt="white rabbit on green background" width="128">
 </p>
 
-Bunny is a high-performance epub reader for Android, specifically engineered for RSVP (Rapid
+Bunny is a high-performance epub reader, specifically engineered for RSVP (Rapid
 Serial Visual Presentation). By flashing words at a controlled speed, Bunny allows you to
 consume literature faster than traditional reading while maintaining high comprehension.
 
@@ -34,6 +34,10 @@ You can get the latest version of Bunny Reader through the following channels:
 
 **(Coming Soon)**
 
+[<img src="https://f-droid.org/badge/get-it-on.png"
+alt="Get it on F-Droid"
+height="80">](https://f-droid.org/packages/YOUR.APP.ID)
+
 Bunny Reader will be available on the official F-Droid repository.
 This is the recommended method for receiving automatic, privacy-friendly updates.
 
@@ -50,9 +54,11 @@ check our [releases page](https://github.com/onlyashd/bunny/releases).
 * Android SDK 29+
 
 1. Clone the repository:
+
 ```shell
 git clone https://github.com/onlyashd/bunny.git 
 ```
+
 2. Open the project in Android Studio.
 3. Synchronize Gradle.
 4. Run the `app` configuration.
@@ -70,3 +76,8 @@ our [Architecture Documentation](Architecture.md).
 
 This project is licensed under the **AGPL-3.0** License. See the [LICENSE file](LICENSE) for
 details.
+
+The project uses precompiled libraries, such as [SLF4J by qos-ch](https://github.com/qos-ch/slf4j)
+and [epublib by Paul Siegmann](https://github.com/psiegman/epublib) that are licensed
+under [MIT](https://github.com/qos-ch/slf4j/blob/master/LICENSE.txt)
+and [GNU LGPL](http://www.siegmann.nl/epublib/license) respectively.
