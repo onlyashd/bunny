@@ -3,9 +3,9 @@ package io.github.onlyashd.bunny.ui.theme
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import io.github.onlyashd.bunny.core.AppPreferences
 import io.github.onlyashd.bunny.core.MainEvent
 import io.github.onlyashd.bunny.core.MainViewModel
+import io.github.onlyashd.bunny.core.db.AppPreferences
 import io.github.onlyashd.bunny.ui.theme.themes.AquaTheme
 import io.github.onlyashd.bunny.ui.theme.themes.BrownTheme
 import io.github.onlyashd.bunny.ui.theme.themes.EarthyTheme
@@ -77,6 +77,6 @@ fun setYellowTheme(viewModel: MainViewModel) {
 }
 
 private fun setTheme(theme: Theme, viewModel: MainViewModel) {
-    AppPreferences.setTheme(theme)
+    AppPreferences.UI.setTheme(theme)
     viewModel.onEvent(MainEvent.ThemeChange(theme))
 }

@@ -1,4 +1,4 @@
-package io.github.onlyashd.bunny.ui.composable.library
+package io.github.onlyashd.bunny.ui.composable.books
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.height
@@ -10,21 +10,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.core.net.toUri
 import coil3.compose.AsyncImage
-import io.github.onlyashd.bunny.library.EpubData
+import io.github.onlyashd.bunny.core.model.BookData
 import io.github.onlyashd.bunny.util.composable.colorScheme
 import io.github.onlyashd.bunny.util.composable.typography
 
 @Composable
 fun Book(
-    book: EpubData,
+    book: BookData,
     onClick: () -> Unit,
 ) {
     ConstraintLayout(
         modifier = Modifier
-            .height(96.dp)
-            .width(48.dp)
+            .height(250.dp)
+            .width(250.dp)
             .clickable(onClick = { onClick() })
     ) {
         val (coverRef, titleRef, progressRef) = createRefs()
@@ -38,18 +37,20 @@ fun Book(
                     end.linkTo(parent.end)
                 }
         ) {
-            if (book.coverImage.isNullOrEmpty()) {
-                DefaultBookCover()
-            } else {
-                AsyncImage(
-                    model = book.coverImage.toUri(),
-                    contentDescription = null
-                )
+            book.coverImg.let {
+                if (it.isEmpty()) {
+                    DefaultBookCover()
+                } else {
+                    AsyncImage(
+                        model = it.toByteArray(),
+                        contentDescription = null
+                    )
+                }
             }
         }
 
         LinearProgressIndicator(
-            progress = { book.readingProgress ?: 0F },
+            progress = { book.progress },
             modifier = Modifier
                 .constrainAs(progressRef) {
                     top.linkTo(coverRef.bottom)

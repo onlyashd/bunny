@@ -14,3 +14,6 @@ fun String.isValid(maxLength: Int, allowEmpty: Boolean = false): Boolean =
         this.isNotEmpty() && this.length <= maxLength
     }
 
+fun String.toKey(): String = this.lowercase()
+    .replace(" ", "_")
+    .replace("-", "_")

@@ -12,6 +12,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
+import io.github.onlyashd.bunny.observability.SentryViewModel
 import io.github.onlyashd.bunny.ui.composable.navigation.BottomBar
 import io.github.onlyashd.bunny.ui.composable.navigation.NavigationStack
 import io.github.onlyashd.bunny.ui.composable.navigation.TopBar
@@ -20,10 +21,9 @@ import io.github.onlyashd.bunny.util.composable.colorScheme
 import io.paperdb.Paper
 import javax.inject.Inject
 import javax.inject.Provider
-import io.github.onlyashd.bunny.observability.SentryViewModel
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity @Inject constructor() : ComponentActivity() {
     @Inject
     lateinit var viewModel: Provider<MainViewModel>
 
@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
             AppTheme(viewModel.get().stateApp.theme) {
                 Scaffold(
                     contentWindowInsets = WindowInsets.safeContent,
-                    topBar = { TopBar(navController) },
+                    topBar = { TopBar() },
                     bottomBar = { BottomBar(navController) }
                 ) { innerPadding ->
                     Surface(

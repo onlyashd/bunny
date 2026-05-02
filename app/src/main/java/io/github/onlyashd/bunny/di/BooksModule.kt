@@ -4,14 +4,16 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.github.onlyashd.bunny.library.LibraryViewModel
+import io.github.onlyashd.bunny.books.BooksViewModel
+import io.github.onlyashd.bunny.core.db.BookStorage
 import nl.siegmann.epublib.epub.EpubReader
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object LibraryModule {
+object BooksModule {
     @Provides
     @Singleton
-    fun providesLibraryViewModel(): LibraryViewModel = LibraryViewModel(EpubReader())
+    fun provideLibraryViewModel(): BooksViewModel =
+        BooksViewModel(EpubReader(), BookStorage)
 }

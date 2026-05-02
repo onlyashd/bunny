@@ -28,6 +28,8 @@ fun SettingsScreen(
         ThemePicker()
 
         SentryToggle({ sentryDialogVisible = true })
+
+        FilePicker()
     }
 
     if (sentryDialogVisible) {

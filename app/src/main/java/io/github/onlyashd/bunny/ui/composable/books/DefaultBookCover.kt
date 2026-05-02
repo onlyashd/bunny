@@ -1,4 +1,4 @@
-package io.github.onlyashd.bunny.ui.composable.library
+package io.github.onlyashd.bunny.ui.composable.books
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

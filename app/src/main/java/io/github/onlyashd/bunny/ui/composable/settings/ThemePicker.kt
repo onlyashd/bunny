@@ -4,7 +4,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,7 +19,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -71,6 +69,10 @@ fun ThemePicker(viewModel: MainViewModel? = hiltViewModel()) {
                     },
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
+                ThemeCard(R.string.theme_green.getString(), Theme.Green, current) {
+                    setGreenTheme(viewModel)
+                }
+
                 ThemeCard(R.string.theme_aqua.getString(), Theme.Aqua, current) {
                     setAquaTheme(viewModel)
                 }
@@ -81,10 +83,6 @@ fun ThemePicker(viewModel: MainViewModel? = hiltViewModel()) {
 
                 ThemeCard(R.string.theme_earthy.getString(), Theme.Earthy, current) {
                     setEarthyTheme(viewModel)
-                }
-
-                ThemeCard(R.string.theme_green.getString(), Theme.Green, current) {
-                    setGreenTheme(viewModel)
                 }
 
                 ThemeCard(R.string.theme_pink.getString(), Theme.Pink, current) {

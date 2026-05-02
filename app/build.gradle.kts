@@ -1,4 +1,8 @@
 import io.github.onlyashd.buildsrc.Sentry
+import io.github.onlyashd.buildsrc.compileSdk
+import io.github.onlyashd.buildsrc.getVersion
+import io.github.onlyashd.buildsrc.minSdk
+import io.github.onlyashd.buildsrc.targetSdk
 
 plugins {
     alias(libs.plugins.android.application)
@@ -10,18 +14,14 @@ plugins {
 
 android {
     namespace = "io.github.onlyashd.bunny"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = project.compileSdk()
 
     defaultConfig {
         applicationId = "io.github.onlyashd.bunny"
-        minSdk = 29
-        targetSdk = 36
-        versionCode = 1
-        versionName = "0.1"
+        minSdk = project.minSdk()
+        targetSdk = project.targetSdk()
+        versionCode = project.getVersion("app.versionCode").toInt()
+        versionName = project.getVersion("app.versionName")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "SENTRY_DSN", "\"${Sentry.APP_DSN}\"")
@@ -29,7 +29,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -73,6 +73,8 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.documentfile)
+    implementation(libs.filekit.core)
+    implementation(libs.filekit.dialogs.compose)
     implementation(libs.hilt)
     implementation(libs.paper)
     implementation(libs.coil)

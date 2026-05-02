@@ -1,4 +1,4 @@
-package io.github.onlyashd.bunny.reader
+package io.github.onlyashd.bunny.ui.composable.reader
 
 import android.annotation.SuppressLint
 import android.webkit.WebView
@@ -7,18 +7,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import io.github.onlyashd.bunny.library.LibraryViewModel
+import io.github.onlyashd.bunny.books.BooksViewModel
 
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
-fun EpubReaderView(
-    filePath: String,
-    libraryViewModel: LibraryViewModel = hiltViewModel()
+fun EpubReaderWebView(
+    booksViewModel: BooksViewModel = hiltViewModel()
 ) {
-    libraryViewModel.loadBook(filePath)
-    val book = libraryViewModel.book.collectAsState().value
-    val firstChapter = book.spine.getResource(0)
-    val data = String(firstChapter.data)
+    val data = booksViewModel.bookItem.collectAsState().value
 
     AndroidView(factory = { context ->
         WebView(context).apply {
@@ -27,7 +23,7 @@ fun EpubReaderView(
 
             loadDataWithBaseURL(
                 "file:///android_asset/",
-                data,
+                data.uri,
                 "application/xhtml+xml",
                 "UTF-8",
                 null

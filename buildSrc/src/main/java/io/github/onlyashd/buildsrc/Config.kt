@@ -1,6 +1,14 @@
 package io.github.onlyashd.buildsrc
 
-object Config {
-    const val MIN_SDK = 29
-    const val TARGET_SDK = 36
+import org.gradle.api.Project
+import java.util.Properties
+
+fun Project.getVersion(key: String): String {
+    val properties = Properties()
+    properties.load(file("${rootDir.absolutePath}/version.properties").inputStream())
+    return properties.getProperty(key)
 }
+
+fun Project.minSdk(): Int = 30
+fun Project.targetSdk(): Int = 36
+fun Project.compileSdk(): Int = 36

@@ -19,7 +19,7 @@ object CoreModule {
 
     @Provides
     @Singleton
-    fun providesSentryViewModel(
+    fun provideSentryViewModel(
         @ApplicationContext context: Context,
         mainViewModel: MainViewModel
     ): SentryViewModel = SentryViewModel(context, mainViewModel)

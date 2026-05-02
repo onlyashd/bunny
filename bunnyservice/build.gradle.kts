@@ -1,5 +1,8 @@
-import io.github.onlyashd.buildsrc.Config
 import io.github.onlyashd.buildsrc.Sentry
+import io.github.onlyashd.buildsrc.compileSdk
+import io.github.onlyashd.buildsrc.getVersion
+import io.github.onlyashd.buildsrc.minSdk
+import io.github.onlyashd.buildsrc.targetSdk
 
 plugins {
     alias(libs.plugins.android.application)
@@ -10,18 +13,14 @@ plugins {
 
 android {
     namespace = "io.github.onlyashd.bunnyservice"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = project.compileSdk()
 
     defaultConfig {
         applicationId = "io.github.onlyashd.bunnyservice"
-        minSdk = Config.MIN_SDK
-        targetSdk = Config.TARGET_SDK
-        versionCode = 1
-        versionName = "0.1"
+        minSdk = project.minSdk()
+        targetSdk = project.targetSdk()
+        versionCode = project.getVersion("service.versionCode").toInt()
+        versionName = project.getVersion("service.versionName")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "SENTRY_DSN", "\"${Sentry.SERVICE_DSN}\"")
@@ -29,7 +28,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

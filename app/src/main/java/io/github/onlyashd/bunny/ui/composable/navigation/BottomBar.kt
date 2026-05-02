@@ -45,9 +45,15 @@ fun BottomBar(
             )
 
             NavigationBarItem(
-                icon = { Icon(R.drawable.settings_filled.getDrawable(), "") },
+                icon = { Icon(R.drawable.bookshelf.getDrawable(), "") },
                 selected = selectedItem == 1,
-                onClick = { navigate(Screen.Settings.route, 1) }
+                onClick = { navigate(Screen.Library.route, 1) }
+            )
+
+            NavigationBarItem(
+                icon = { Icon(R.drawable.settings_filled.getDrawable(), "") },
+                selected = selectedItem == 2,
+                onClick = { navigate(Screen.Settings.route, 2) }
             )
         }
     }

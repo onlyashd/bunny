@@ -8,12 +8,10 @@ import io.github.onlyashd.bunny.core.MainViewModel
 fun SetupTopBar(
     title: String = "",
     visible: Boolean = true,
-    backBtnVisible: Boolean = true,
     viewModel: MainViewModel = hiltViewModel()
 ) {
     viewModel.setTopBarTitle(title)
     viewModel.setTopBarVisibility(visible)
-    viewModel.setTopBarBackBtnVisibility(backBtnVisible)
 }
 
 @Composable

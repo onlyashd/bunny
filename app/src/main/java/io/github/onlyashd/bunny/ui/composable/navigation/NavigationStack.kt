@@ -5,10 +5,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import io.github.onlyashd.bunny.core.Screen
+import io.github.onlyashd.bunny.ui.composable.books.BookshelfScreen
 import io.github.onlyashd.bunny.ui.composable.downloader.DownloaderScreen
 import io.github.onlyashd.bunny.ui.composable.home.HomeScreen
-import io.github.onlyashd.bunny.ui.composable.library.LibraryScreen
-import io.github.onlyashd.bunny.ui.composable.reader.ReaderScreen
+import io.github.onlyashd.bunny.ui.composable.reader.EpubReaderWebView
 import io.github.onlyashd.bunny.ui.composable.rsvp.RsvpScreen
 import io.github.onlyashd.bunny.ui.composable.settings.SettingsScreen
 
@@ -16,10 +16,10 @@ import io.github.onlyashd.bunny.ui.composable.settings.SettingsScreen
 fun NavigationStack(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Screen.Home.route) {
         composable(Screen.Home.route) { HomeScreen(navController) }
-        composable(Screen.Reader.route) { ReaderScreen(navController) }
+        composable(Screen.Reader.route) { EpubReaderWebView() }
         composable(Screen.Settings.route) { SettingsScreen(navController) }
         composable(Screen.Rsvp.route) { RsvpScreen(navController) }
-        composable(Screen.Library.route) { LibraryScreen(navController) }
+        composable(Screen.Library.route) { BookshelfScreen(navController) }
         composable(Screen.Downloader.route) { DownloaderScreen(navController) }
     }
 }

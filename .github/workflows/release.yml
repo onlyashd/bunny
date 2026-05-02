@@ -3,8 +3,15 @@ name: Release Creation
 on:
   workflow_dispatch:
     inputs:
+      release_target:
+        description: 'What are you releasing?'
+        required: true
+        type: choice
+        options:
+          - Only App
+          - Both App and Service
       tag_name:
-        description: 'Tag name (e.g., v1.0.0)'
+        description: 'Git Tag (e.g., v1.0.0)'
         required: true
         type: string
       release_type:
@@ -14,6 +21,18 @@ on:
         options:
           - release
           - pre-release
+      app_version_name:
+        description: 'New App Version Name'
+        required: true
+      app_version_code:
+        description: 'New App Version Code'
+        required: true
+      service_version_name:
+        description: 'New Service Version Name (Ignore if Only App)'
+        required: false
+      service_version_code:
+        description: 'New Service Version Code (Ignore if Only App)'
+        required: false
 
 jobs:
   build-and-release:
@@ -30,6 +49,27 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update versions.properties
+        run: |
+          # Update App Versions
+          sed -i "s/^app.versionCode=.*/app.versionCode=${{ github.event.inputs.app_version_code }}/" versions.properties
+          sed -i "s/^app.versionName=.*/app.versionName=${{ github.event.inputs.app_version_name }}/" versions.properties
+          
+          # Update Service Versions if both selected
+          if [[ "${{ github.event.inputs.release_target }}" == "Both App and Service" ]]; then
+            sed -i "s/^service.versionCode=.*/service.versionCode=${{ github.event.inputs.service_version_code }}/" versions.properties
+            sed -i "s/^service.versionName=.*/service.versionName=${{ github.event.inputs.service_version_name }}/" versions.properties
+          fi
+
+      - name: Commit and Push Version Changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add versions.properties
+          git commit -m "chore: bump version to ${{ github.event.inputs.tag_name }}"
+          git push origin HEAD
 
       - name: Set up JDK 21
         uses: actions/setup-java@v4
@@ -72,13 +112,8 @@ jobs:
       - name: Generate SHA-256 Hashes
         id: shasum
         run: |
-          # Generate hashes for both APKs
-          CLIENT_SHA=$(sha256sum app/build/outputs/apk/release/*.apk | awk '{ print $1 }')
-          SERVER_SHA=$(sha256sum bunnyservice/build/outputs/apk/release/*.apk | awk '{ print $1 }')
-          
-          # Save to output for use in the next step
-          echo "client_sha=$CLIENT_SHA" >> $GITHUB_OUTPUT
-          echo "server_sha=$SERVER_SHA" >> $GITHUB_OUTPUT
+          echo "client_sha=$(sha256sum app/build/outputs/apk/release/*.apk | awk '{ print $1 }')" >> $GITHUB_OUTPUT
+          echo "server_sha=$(sha256sum bunnyservice/build/outputs/apk/release/*.apk | awk '{ print $1 }')" >> $GITHUB_OUTPUT
 
       - name: Create GitHub Release Draft
         uses: softprops/action-gh-release@v2
@@ -90,6 +125,8 @@ jobs:
             ## Verification Hashes (SHA-256)
             * **BunnyApp:** `${{ steps.shasum.outputs.client_sha }}`
             * **BunnyService:** `${{ steps.shasum.outputs.server_sha }}`
+            
+            ${{ github.event.inputs.release_target == 'Only App' && '> **Note:** The Service module had no changes in this release. Please refer to the previous version for the latest Service APK.' || '' }}
             
             > **Note:** To verify, run `sha256sum <file.apk>` in your terminal and compare the result.
           files: |

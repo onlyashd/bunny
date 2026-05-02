@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.onlyashd.bunny.BuildConfig
-import io.github.onlyashd.bunny.core.AppPreferences
 import io.github.onlyashd.bunny.core.MainEvent
 import io.github.onlyashd.bunny.core.MainViewModel
+import io.github.onlyashd.bunny.core.db.AppPreferences
 import io.sentry.android.core.SentryAndroid
 import javax.inject.Inject
 
@@ -36,12 +36,12 @@ class SentryViewModel @Inject constructor(
     }
 
     fun toggleSentry() {
-        AppPreferences.toggleSentryState()
+        AppPreferences.Sentry.toggleState()
         viewModel.onEvent(MainEvent.SentryStateChange())
     }
 
     fun toggleSentryScreening() {
-        AppPreferences.toggleSentryScreening()
+        AppPreferences.Sentry.toggleScreening()
         viewModel.onEvent(MainEvent.SentryScreeningChange())
     }
 }

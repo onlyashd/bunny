@@ -22,7 +22,7 @@ fun HomeScreen(
 ) {
     var sentryDialogVisible by remember { mutableStateOf(true) }
 
-    SetupTopBar(R.string.app_name.getString(), backBtnVisible = false)
+    SetupTopBar(R.string.app_name.getString())
 
     if (mainViewModel.stateApp.enabledSentryScreening && sentryDialogVisible) {
         SentryDetailsDialog(
